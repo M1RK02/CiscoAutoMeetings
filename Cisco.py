@@ -43,6 +43,8 @@ def sendMessage(message): #Auto send message in the chat
     pyautogui.typewrite(message)
     pyautogui.press('enter')
 
+wait = 10
+
 max = printSubjects() + 1 #Print the list of possible meetings and save the max possible choice
 
 while True:
@@ -57,19 +59,19 @@ message = input('Insert a message to send after joining, leave blank for none: '
 
 pyautogui.hotkey('win', 'd') #Go to desktop
 
-time.sleep(1)
-
 os.system(r'start "" "C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe"') #Open Cisco Webex
 
-time.sleep(5)
+time.sleep(wait)
 
-pyautogui.press('tab', presses=5) #Go to the code box
+screen = pyautogui.size() #Get screen size
+
+pyautogui.leftClick(screen[0]-250, 250) #Click code box
+
+pyautogui.hotkey('ctrl', 'a')
 
 pyautogui.typewrite(searchCode()) #Write down the code
 
-pyautogui.press('enter', presses=2, interval=10) #Enter the class
-
-time.sleep(5)
+pyautogui.press('enter', presses=2, interval=wait) #Enter the class
 
 if message: #If message is not black send message
     sendMessage(message)
