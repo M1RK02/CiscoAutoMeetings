@@ -33,16 +33,28 @@ def bounds(user_input): #Check if the input is in bounds
         return False
     else: return True
 
+def sendMessage(message): #Auto send message in the chat
+    pyautogui.press('tab', presses=2)
+    pyautogui.press('enter')
+    pyautogui.press('tab')
+    pyautogui.press('enter')
+    pyautogui.press('f6')
+    pyautogui.press('tab', presses=3)
+    pyautogui.typewrite(message)
+    pyautogui.press('enter')
+
 max = printSubjects() + 1 #Print the list of possible meetings and save the max possible choice
 
 while True:
     choice = input('Select a subject: ')
-    if not checkInput(choice):
+    if not checkInput(choice): #Check if the input is valid
         print("Please try again")
         continue
     choice = int(choice)
     break
-    
+
+message = input("Insert a message to send after joining, leave blank for none: ")
+
 pyautogui.hotkey('win', 'd') #Go to desktop
 
 time.sleep(2)
@@ -56,3 +68,8 @@ pyautogui.press('tab', presses=5) #Go to the code box
 pyautogui.typewrite(searchCode()) #Write down the code
 
 pyautogui.press('enter', presses=2, interval=2) #Enter the class
+
+time.sleep(2)
+
+if message != '\n': #If message is not black send message
+    sendMessage(message)
