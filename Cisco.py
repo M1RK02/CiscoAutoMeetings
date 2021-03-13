@@ -23,13 +23,13 @@ def checkInput(user_input): #Check if the input is valid
 
 def isNum(user_input): #Check if the input is a number
     if not user_input.isnumeric():
-        print("This is not a valid number")
+        print('This is not a valid number')
         return False
     else: return True
 
 def bounds(user_input): #Check if the input is in bounds
     if user_input > max or user_input < 1:
-        print("This number is out of bounds")
+        print('This number is out of bounds')
         return False
     else: return True
 
@@ -46,30 +46,30 @@ def sendMessage(message): #Auto send message in the chat
 max = printSubjects() + 1 #Print the list of possible meetings and save the max possible choice
 
 while True:
-    choice = input('Select a subject: ')
+    choice = input('Select a meeting: ')
     if not checkInput(choice): #Check if the input is valid
-        print("Please try again")
+        print('Please try again')
         continue
     choice = int(choice)
     break
 
-message = input("Insert a message to send after joining, leave blank for none: ")
+message = input('Insert a message to send after joining, leave blank for none: ')
 
 pyautogui.hotkey('win', 'd') #Go to desktop
 
-time.sleep(2)
+time.sleep(1)
 
 os.system(r'start "" "C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe"') #Open Cisco Webex
 
-time.sleep(2)
+time.sleep(5)
 
 pyautogui.press('tab', presses=5) #Go to the code box
 
 pyautogui.typewrite(searchCode()) #Write down the code
 
-pyautogui.press('enter', presses=2, interval=2) #Enter the class
+pyautogui.press('enter', presses=2, interval=10) #Enter the class
 
-time.sleep(2)
+time.sleep(5)
 
-if message != '\n': #If message is not black send message
+if message: #If message is not black send message
     sendMessage(message)
