@@ -1,23 +1,48 @@
-#This program needs a text file named Cisco.txt with one subject per line formatted like this "NAME CODE"
+#This program needs a text file named Cisco.txt with one meeting per line formatted like this "NAME CODE"
 import pyautogui, os, time
 
-def printSubjects():
+def printSubjects(): #Print the list of possible meetings and return the max possible index
     file = open('Cisco.txt')
     for i, line in enumerate(file):
         subject = line.split()
         print(f'{i+1}) {subject[0]}')
+    return i
 
-def searchCode():
+def searchCode(): #Return the code of the selected meetings
     file = open('Cisco.txt')
     for i, line in enumerate(file):
         code = line.split()
         if i+1 == choice:
             return code[1]
 
-printSubjects() #Print the list of possible subjects
+def checkInput(user_input): #Check if the input is valid
+    if not isNum(user_input): return False
+    user_input = int(user_input)
+    if not bounds(user_input): return False
+    return True
 
-choice = int(input('Select a subject: ')) #Select a subject
+def isNum(user_input): #Check if the input is a number
+    if not user_input.isnumeric():
+        print("This is not a valid number")
+        return False
+    else: return True
 
+def bounds(user_input): #Check if the input is in bounds
+    if user_input > max or user_input < 1:
+        print("This number is out of bounds")
+        return False
+    else: return True
+
+max = printSubjects() + 1 #Print the list of possible meetings and save the max possible choice
+
+while True:
+    choice = input('Select a subject: ')
+    if not checkInput(choice):
+        print("Please try again")
+        continue
+    choice = int(choice)
+    break
+    
 pyautogui.hotkey('win', 'd') #Go to desktop
 
 time.sleep(2)
