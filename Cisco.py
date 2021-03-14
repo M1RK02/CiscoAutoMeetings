@@ -8,7 +8,7 @@ def printSubjects(): #Print the list of possible meetings and return the max pos
         print(f'{i+1}) {subject[0]}')
     return i
 
-def searchCode(): #Return the code of the selected meetings
+def getCode(): #Return the code of the selected meetings
     file = open('Cisco.txt')
     for i, line in enumerate(file):
         code = line.split()
@@ -33,16 +33,6 @@ def bounds(user_input): #Check if the input is in bounds
         return False
     else: return True
 
-def sendMessage(message): #Auto send message in the chat
-    pyautogui.press('tab', presses=2)
-    pyautogui.press('enter')
-    pyautogui.press('tab')
-    pyautogui.press('enter')
-    pyautogui.press('f6')
-    pyautogui.press('tab', presses=3)
-    pyautogui.typewrite(message)
-    pyautogui.press('enter')
-
 wait = 10
 
 max = printSubjects() + 1 #Print the list of possible meetings and save the max possible choice
@@ -54,8 +44,6 @@ while True:
         continue
     choice = int(choice)
     break
-
-message = input('Insert a message to send after joining, leave blank for none: ')
 
 pyautogui.hotkey('win', 'd') #Go to desktop
 
@@ -69,9 +57,6 @@ pyautogui.leftClick(screen[0]-250, 250) #Click code box
 
 pyautogui.hotkey('ctrl', 'a')
 
-pyautogui.typewrite(searchCode()) #Write down the code
+pyautogui.typewrite(getCode()) #Write down the code
 
 pyautogui.press('enter', presses=2, interval=wait) #Enter the class
-
-if message: #If message is not black send message
-    sendMessage(message)
