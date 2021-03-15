@@ -13,7 +13,10 @@ def listMeetings(): #Add a button for every meeting in the file
     i=-1
     for i, line in enumerate(file):
         meeting = line.split()
-        buttons.append([sg.Button(meeting[0], key=i)])
+        if meeting[1].isnumeric() and int(meeting[1])>99999999 and int(meeting[1])<10000000000:
+            buttons.append([sg.Button(meeting[0], key=i)])
+        else:
+            buttons.append([sg.Button(f'{meeting[0]} (Code not valid)', key=-1)])
     return i
 
 def getCode(): #Return the code of the selected meetings
@@ -63,6 +66,8 @@ while True:
     if event is None:
         window.Close()
         break
+    elif event == -1:
+        continue
     else:
         choice = event
         window.Close()
