@@ -11,13 +11,15 @@ def checkFile(file): #Check if the file exist
 def listMeetings(): #Add a button for every meeting in the file
     file = open(MeetingsFile)
     i=-1
+    CheckFlag = False
     for i, line in enumerate(file):
         meeting = line.split()
         if meeting[1].isnumeric() and int(meeting[1])>99999999 and int(meeting[1])<10000000000:
             buttons.append([sg.Button(meeting[0], key=i)])
+            CheckFlag = True
         else:
             buttons.append([sg.Button(f'{meeting[0]} (Code not valid)', key=-1)])
-    return i
+    return i, CheckFlag
 
 def getCode(): #Return the code of the selected meetings
     file = open(MeetingsFile)
@@ -50,9 +52,11 @@ if not checkFile(MeetingsFile):
     layout = [[sg.Text('File "Cisco.txt" not found')]]
 else:
     buttons = []
-    i = listMeetings()
+    i , CheckFlag = listMeetings()
     if i == -1:
         layout = [[sg.Text('"Cisco.txt" is blank')]]
+    elif not CheckFlag:
+        layout = [[sg.Text('All the codes are invalid')]]
     else:
         layout = [ *buttons ]
 
