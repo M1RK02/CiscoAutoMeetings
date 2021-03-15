@@ -1,7 +1,8 @@
 #This program needs a text file named Cisco.txt with one meeting per line formatted like this "NAME CODE"
 import pyautogui, os, time, PySimpleGUI as sg
 
-MeetingsFile = r"Cisco.txt"
+CiscoDirectory = r'Cisco Webex Meetings.lnk'
+MeetingsFile = r'Cisco.txt'
 
 def checkFile(): #Check if the file exist
     try:
@@ -27,7 +28,8 @@ def getCode(): #Return the code of the selected meetings
 
 def enterMeeting():
     pyautogui.hotkey('win', 'd') #Go to desktop
-    os.system(r'start "" "C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe"') #Open Cisco Webex
+    time.sleep(1)
+    os.system(f'start /max "" "{CiscoDirectory}"') #Open Cisco Webex
     time.sleep(wait)
     screen = pyautogui.size() #Get screen size
     pyautogui.leftClick(screen[0]-250, 250) #Click code box
@@ -40,11 +42,11 @@ wait = 10
 buttons = []
 
 if not checkFile():
-    layout = [[sg.Text('The file "Cisco.txt" does not exist')]]
+    layout = [[sg.Text('File "Cisco.txt" not found')]]
 else:
     i = listMeetings()
     if i == -1:
-        layout = [[sg.Text('There are no meetings in the "Cisco.txt" file')]]
+        layout = [[sg.Text('No meetings in the file "Cisco.txt"')]]
     else:
         layout = [ *buttons ] 
 
