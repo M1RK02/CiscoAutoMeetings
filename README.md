@@ -12,6 +12,7 @@
 To run this script you will need this Python modules:
 - PySimpleGui
 - PyWinAuto
+- Keyboard
 
 This script also need a text file with meetings code, formatted like this:
 ```
