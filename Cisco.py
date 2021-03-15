@@ -45,6 +45,8 @@ CiscoDirectory = r'C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe'
 
 MeetingsFile = r'Cisco.txt'
 
+Icon = r'Icon.ico'
+
 if not checkFile(CiscoDirectory):
     layout = [[sg.Text('Cisco executable not found')]]
 
@@ -60,7 +62,9 @@ else:
     else:
         layout = [ *buttons ]
 
-window = sg.Window('CiscoAutoMeetings', layout, finalize=True, element_justification='Center')
+sg.theme('TealMono')
+
+window = sg.Window('CiscoAutoMeetings', layout, finalize=True, element_justification='Center', icon=f'{Icon}')
 
 window.set_min_size((300,0))
     
