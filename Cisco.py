@@ -1,9 +1,9 @@
 import keyboard, time, PySimpleGUI as sg
 from pywinauto import Application
 
-def checkFile(): #Check if the file exist
+def checkFile(file): #Check if the file exist
     try:
-        f = open(MeetingsFile)
+        f = open(file)
         return True
     except IOError:
         return False
@@ -40,7 +40,10 @@ CiscoDirectory = r'C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe'
 
 MeetingsFile = r'Cisco.txt'
 
-if not checkFile():
+if not checkFile(CiscoDirectory):
+    layout = [[sg.Text('Cisco executable not found')]]
+
+if not checkFile(MeetingsFile):
     layout = [[sg.Text('File "Cisco.txt" not found')]]
 else:
     buttons = []
@@ -48,8 +51,7 @@ else:
     if i == -1:
         layout = [[sg.Text('"Cisco.txt" is blank')]]
     else:
-        layout = [ *buttons ] 
-
+        layout = [ *buttons ]
 
 window = sg.Window('CiscoAutoMeetings', layout, finalize=True, element_justification='Center')
 
