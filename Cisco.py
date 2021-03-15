@@ -13,7 +13,7 @@ def listMeetings(): #Add a button for every meeting in the file
     i=-1
     CheckFlag = False
     for i, line in enumerate(file):
-        meeting = line.split()
+        meeting = line.split(';')
         if meeting[1].isnumeric() and int(meeting[1])>99999999 and int(meeting[1])<10000000000:
             buttons.append([sg.Button(meeting[0], key=i)])
             CheckFlag = True
@@ -24,15 +24,15 @@ def listMeetings(): #Add a button for every meeting in the file
 def getCode(): #Return the code of the selected meetings
     file = open(MeetingsFile)
     for i, line in enumerate(file):
-        code = line.split()
+        code = line.split(';')
         if i == choice:
             return code[1]
 
 def enterMeeting():
     keyboard.send('win+d') #Go to desktop
     time.sleep(1)
-    app = Application(backend="uia").start(f'{CiscoDirectory}') #Open Cisco Webex
-    app = Application(backend="uia").connect(path=f'{CiscoDirectory}')
+    app = Application(backend='uia').start(f'{CiscoDirectory}') #Open Cisco Webex
+    app = Application(backend='uia').connect(path=f'{CiscoDirectory}')
     time.sleep(5)
     app.Pane.Edit.click_input() #Click the code box
     keyboard.send('ctrl+a')
