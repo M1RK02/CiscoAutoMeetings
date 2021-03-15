@@ -1,8 +1,7 @@
-
-# CiscoAutoMeetings
+# <img src="https://i.imgur.com/97NeLaG.png" width="50px"> CiscoAutoMeetings
 
 <p align="center">
-    <img src="https://i.imgur.com/x2bO7Ne.png">
+    <img src="https://i.imgur.com/bIdhFUg.png">
     <br />
     <i>An experimental Python script that autojoin the selected meeting</i>
 </p>
