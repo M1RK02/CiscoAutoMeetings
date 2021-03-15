@@ -10,8 +10,8 @@
 ## Usage
 
 To run this script you will need this Python modules:
-	- PySimpleGui
-	- PyAutoGui
+- PySimpleGui
+- PyAutoGui
 
 This script also need a text file with meetings code, formatted like this:
 ```
@@ -20,7 +20,6 @@ M.Rossi 4564564564
 M.Pica 954429042
 ```
 Modify the cisco executable path and the text file path and start the script.
-	
 
 ## Contact
 
