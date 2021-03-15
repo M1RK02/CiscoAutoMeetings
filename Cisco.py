@@ -1,15 +1,17 @@
 #This program needs a text file named Cisco.txt with one meeting per line formatted like this "NAME CODE"
 import pyautogui, os, time, PySimpleGUI as sg
 
+MeetingsFile = r"Cisco.txt"
+
 def checkFile(): #Check if the file exist
     try:
-        f = open('Cisco.txt')
+        f = open(MeetingsFile)
         return True
     except IOError:
         return False
 
 def listMeetings(): #Add a button for every meeting in the file
-    file = open('Cisco.txt')
+    file = open(MeetingsFile)
     i=-1
     for i, line in enumerate(file):
         meeting = line.split()
@@ -17,7 +19,7 @@ def listMeetings(): #Add a button for every meeting in the file
     return i
 
 def getCode(): #Return the code of the selected meetings
-    file = open('Cisco.txt')
+    file = open(MeetingsFile)
     for i, line in enumerate(file):
         code = line.split()
         if i == choice:
@@ -55,10 +57,10 @@ window.set_min_size((300,0))
 while True:
     event, values = window.Read()
     if event is None:
+        window.Close()
         break
     else:
         choice = event
+        window.Close()
         enterMeeting()
         break
-    
-window.Close()
