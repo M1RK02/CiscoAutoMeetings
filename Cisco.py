@@ -1,5 +1,5 @@
-#This program needs a text file named Cisco.txt with one meeting per line formatted like this "NAME CODE"
-import pyautogui, os, time, PySimpleGUI as sg
+import keyboard, time, PySimpleGUI as sg
+from pywinauto import Application
 
 def checkFile(): #Check if the file exist
     try:
@@ -24,29 +24,26 @@ def getCode(): #Return the code of the selected meetings
             return code[1]
 
 def enterMeeting():
-    pyautogui.hotkey('win', 'd') #Go to desktop
+    keyboard.send('win+d') #Go to desktop
     time.sleep(1)
-    os.system(f'start /max "" "{CiscoDirectory}"') #Open Cisco Webex
-    time.sleep(wait)
-    screen = pyautogui.size() #Get screen size
-    pyautogui.leftClick(screen[0]-250, 250) #Click code box
-    pyautogui.hotkey('ctrl', 'a')
-    pyautogui.typewrite(getCode()) #Write down the code
-    pyautogui.press('enter')
-    time.sleep(wait)
-    pyautogui.press('enter')
+    app = Application(backend="uia").start(f'{CiscoDirectory}') #Open Cisco Webex
+    app = Application(backend="uia").connect(path=f'{CiscoDirectory}')
+    time.sleep(5)
+    app.Pane.Edit.click_input() #Click the code box
+    keyboard.send('ctrl+a')
+    keyboard.write(getCode()) #Write down the code
+    keyboard.send('enter')
+    time.sleep(10)
+    keyboard.send('enter')
 
-CiscoDirectory = r'Cisco Webex Meetings.lnk'
+CiscoDirectory = r'C:\Program Files (x86)\Webex\Webex\Applications\ptoneclk.exe'
 
 MeetingsFile = r'Cisco.txt'
-
-wait = 10
-
-buttons = []
 
 if not checkFile():
     layout = [[sg.Text('File "Cisco.txt" not found')]]
 else:
+    buttons = []
     i = listMeetings()
     if i == -1:
         layout = [[sg.Text('"Cisco.txt" is blank')]]
