@@ -23,7 +23,7 @@ Modify the cisco executable path and the text file path and start the script.
 
 ## Contact
 
-If you have contributions, need support, have suggestions, or just want to get in touch with the me, join my [Discord server](https://discord.gg/XtkJEFU)!
+If you have contributions, need support, have suggestions, or just want to get in touch with the me, join my [Discord server](https://discord.gg/Q9wPYcKtKy)!
 
 ## License
 
